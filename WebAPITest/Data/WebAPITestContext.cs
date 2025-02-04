@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using WebAPITest.Models;
+using WebAPITest.Areas.Identity.Data;
 
 namespace WebAPITest.Data
 {
-    public class WebAPITestContext : DbContext
+    public class WebAPITestContext : IdentityDbContext<ContentUser>
     {
         public WebAPITestContext (DbContextOptions<WebAPITestContext> options)
             : base(options)

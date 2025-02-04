@@ -7,10 +7,13 @@ using Microsoft.AspNetCore.Identity;
 using WebAPITest.Areas.Identity.Data;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// links the DB
 builder.Services.AddDbContext<WebAPITestContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("WebAPITestContext") ?? throw new InvalidOperationException("Connection string 'WebAPITestContext' not found.")));
 
-builder.Services.AddDefaultIdentity<ContentUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<WebAPIIdendity>();
+// links up id
+builder.Services.AddDefaultIdentity<ContentUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<WebAPITestContext>();
 
 // Add services to the container.
 
@@ -38,6 +41,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapRazorPages();
 
 Content test = new Content
 {

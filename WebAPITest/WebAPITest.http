@@ -1,6 +1,6 @@
 @WebAPITest_HostAddress = http://localhost:5089
 
-GET {{WebAPITest_HostAddress}}/weatherforecast/
+GET {{WebAPITest_HostAddress}}/api/contents
 Accept: application/json
 
 ###
