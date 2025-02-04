@@ -3,10 +3,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using WebAPITest.Data;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Identity;
+using WebAPITest.Areas.Identity.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<WebAPITestContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("WebAPITestContext") ?? throw new InvalidOperationException("Connection string 'WebAPITestContext' not found.")));
+
+builder.Services.AddDefaultIdentity<ContentUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<WebAPIIdendity>();
 
 // Add services to the container.
 
