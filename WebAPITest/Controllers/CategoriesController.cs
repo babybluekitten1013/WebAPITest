@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using WebAPITest.Models;
 
 namespace WebAPITest.Controllers
 {
+    
     [Route("api/[controller]")]
     [ApiController]
     public class CategoriesController : ControllerBase
@@ -22,6 +24,7 @@ namespace WebAPITest.Controllers
         }
 
         // GET: api/Categories
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Category>>> GetCategory()
         {
@@ -29,6 +32,7 @@ namespace WebAPITest.Controllers
         }
 
         // GET: api/Categories/5
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<ActionResult<Category>> GetCategory(int id)
         {
@@ -44,6 +48,7 @@ namespace WebAPITest.Controllers
 
         // PUT: api/Categories/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCategory(int id, Category category)
         {
@@ -75,6 +80,7 @@ namespace WebAPITest.Controllers
 
         // POST: api/Categories
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<Category>> PostCategory(Category category)
         {
@@ -85,6 +91,7 @@ namespace WebAPITest.Controllers
         }
 
         // DELETE: api/Categories/5
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCategory(int id)
         {

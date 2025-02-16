@@ -14,49 +14,49 @@ namespace WebAPITest.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class ContentsController : ControllerBase
+    public class FeedbackDatasController : ControllerBase
     {
         private readonly WebAPITestContext _context;
 
-        public ContentsController(WebAPITestContext context)
+        public FeedbackDatasController(WebAPITestContext context)
         {
             _context = context;
         }
 
-        // GET: api/Contents
+        // GET: api/FeedbackDatas
         [AllowAnonymous]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Content>>> GetContent()
+        public async Task<ActionResult<IEnumerable<FeedbackData>>> GetFeedbackData()
         {
-            return await _context.Content.ToListAsync();
+            return await _context.FeedbackData.ToListAsync();
         }
 
-        // GET: api/Contents/5
+        // GET: api/FeedbackDatas/5
         [AllowAnonymous]
         [HttpGet("{id}")]
-        public async Task<ActionResult<Content>> GetContent(int id)
+        public async Task<ActionResult<FeedbackData>> GetFeedbackData(int id)
         {
-            var content = await _context.Content.FindAsync(id);
+            var feedbackData = await _context.FeedbackData.FindAsync(id);
 
-            if (content == null)
+            if (feedbackData == null)
             {
                 return NotFound();
             }
 
-            return content;
+            return feedbackData;
         }
 
-        // PUT: api/Contents/5
+        // PUT: api/FeedbackDatas/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutContent(int id, Content content)
+        public async Task<IActionResult> PutFeedbackData(int id, FeedbackData feedbackData)
         {
-            if (id != content.ContentId)
+            if (id != feedbackData.FeedbackId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(content).State = EntityState.Modified;
+            _context.Entry(feedbackData).State = EntityState.Modified;
 
             try
             {
@@ -64,7 +64,7 @@ namespace WebAPITest.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ContentExists(id))
+                if (!FeedbackDataExists(id))
                 {
                     return NotFound();
                 }
@@ -77,36 +77,36 @@ namespace WebAPITest.Controllers
             return NoContent();
         }
 
-        // POST: api/Contents
+        // POST: api/FeedbackDatas
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Content>> PostContent(Content content)
+        public async Task<ActionResult<FeedbackData>> PostFeedbackData(FeedbackData feedbackData)
         {
-            _context.Content.Add(content);
+            _context.FeedbackData.Add(feedbackData);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetContent", new { id = content.ContentId }, content);
+            return CreatedAtAction("GetFeedbackData", new { id = feedbackData.FeedbackId }, feedbackData);
         }
 
-        // DELETE: api/Contents/5
+        // DELETE: api/FeedbackDatas/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteContent(int id)
+        public async Task<IActionResult> DeleteFeedbackData(int id)
         {
-            var content = await _context.Content.FindAsync(id);
-            if (content == null)
+            var feedbackData = await _context.FeedbackData.FindAsync(id);
+            if (feedbackData == null)
             {
                 return NotFound();
             }
 
-            _context.Content.Remove(content);
+            _context.FeedbackData.Remove(feedbackData);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool ContentExists(int id)
+        private bool FeedbackDataExists(int id)
         {
-            return _context.Content.Any(e => e.ContentId == id);
+            return _context.FeedbackData.Any(e => e.FeedbackId == id);
         }
     }
 }

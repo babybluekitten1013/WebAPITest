@@ -19,6 +19,8 @@ namespace WebAPITest.Data
         public DbSet<WebAPITest.Models.Content> Content { get; set; } = default!;
         public DbSet<WebAPITest.Models.Category> Category { get; set; } = default!;
 
+        //ContentUser user { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -41,12 +43,6 @@ namespace WebAPITest.Data
                     CategoryId = 3,
                     CategoryName = "News",
                     PostedContent = []
-                },
-                new Category
-                {
-                    CategoryId = 4,
-                    CategoryName = "Tacos",
-                    PostedContent = []
                 }
                 );
 
@@ -56,11 +52,12 @@ namespace WebAPITest.Data
                     ContentId = 1,
                     Title = "Title",
                     Body = "Title",
-                    Author = "Author",
+                    //Author = "Author",
                     CreatedAt = DateTime.Now,
                     LastModifiedAt = DateTime.Now,
                     Visibility = VisibilityStatus.Visible,
-                    CategoryId = 3
+                    CategoryId = 3,
+                    Category = null
                 }
 
                 );
@@ -68,5 +65,7 @@ namespace WebAPITest.Data
             modelBuilder.Entity<Content>().Navigation(c => c.Category).AutoInclude();
             modelBuilder.Entity<Category>().Navigation(c => c.PostedContent).AutoInclude();
         }
+        public DbSet<WebAPITest.Models.BusinessContactDetails> BusinessContactDetails { get; set; } = default!;
+        public DbSet<WebAPITest.Models.FeedbackData> FeedbackData { get; set; } = default!;
     }
 }

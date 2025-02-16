@@ -43,15 +43,4 @@ app.UseAuthorization();
 app.MapControllers();
 app.MapRazorPages();
 
-Content test = new Content
-{
-    ContentId = 1,
-    Title = "Test",
-    Body = "I like toast",
-    CreatedAt = DateTime.Now,
-    LastModifiedAt = DateTime.Now,
-    Author = "Sarah",
-    Visibility = VisibilityStatus.Visible,
-};
-
 app.Run();
